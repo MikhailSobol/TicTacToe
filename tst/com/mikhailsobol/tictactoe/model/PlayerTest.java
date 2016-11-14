@@ -19,8 +19,8 @@ public class PlayerTest {
     public void getFigure() throws Exception {
         final Figure inputValue = Figure.O;
         final Figure expectedValue = inputValue;
-        final Player player = new Player(null, inputValue);
-        final Figure actualValue = player.getFigure();
+        final Player player = new Player<Figure>(null, inputValue);
+        final Figure actualValue = (Figure) player.getFigure();
         assertEquals(expectedValue, actualValue);
     }
 
