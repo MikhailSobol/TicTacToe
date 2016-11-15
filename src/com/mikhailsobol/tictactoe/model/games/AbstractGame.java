@@ -36,4 +36,8 @@ public abstract class AbstractGame<T> {
         return this.name;
     }
 
+    public Player[] getPlayers() {
+        return this.players;
+    }
+
 }

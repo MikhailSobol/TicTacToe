@@ -20,10 +20,6 @@ public class SingleplayerTicTacToeGame<Figure> extends AbstractGame<Figure> {
         this.ai = ai;
     }
 
-    public Player<Figure> getPlayer() {
-        return this.players[0];
-    }
-
     public DifficultyLevel getDifficultyLevel() {
         return ai.getDifficultyLevel();
     }

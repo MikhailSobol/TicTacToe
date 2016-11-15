@@ -12,8 +12,4 @@ public class MultiplayerTicTacToeGame<Figure> extends AbstractGame<Figure> {
                                     final String name) {
         super(players, field, isSinglePlayer, name);
     }
-
-    public Player<Figure>[] getPlayers() {
-        return this.players;
-    }
 }

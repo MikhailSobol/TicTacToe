@@ -1,0 +1,49 @@
+package com.mikhailsobol.tictactoe.controller;
+
+
+import com.mikhailsobol.tictactoe.model.Player;
+import com.mikhailsobol.tictactoe.model.Point;
+import com.mikhailsobol.tictactoe.model.enums.Figure;
+import com.mikhailsobol.tictactoe.model.exceptions.PlayerNotFoundException;
+import com.mikhailsobol.tictactoe.model.fields.IField;
+import com.mikhailsobol.tictactoe.model.games.AbstractGame;
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
+
+public class TicTacToeCurrentMoveController {
+
+    public Player getCurrentPlayer(final AbstractGame game) throws PlayerNotFoundException {
+        final Player[] players = game.getPlayers();
+        final IField field = game.getField();
+        final int occupiedCells = countOccupiedCells(field);
+        final Figure currentFigure = getCurrentFigure(occupiedCells);
+        final Player currentPlayer = getPlayerByFigure(currentFigure, players);
+        return currentPlayer;
+    }
+
+    private Player getPlayerByFigure(final Figure currentFigure, final Player[] players)
+            throws PlayerNotFoundException {
+        for (final Player player : players) {
+            if (player.getFigure() == currentFigure) {
+                return player;
+            }
+        }
+        throw new PlayerNotFoundException();
+    }
+
+    private Figure getCurrentFigure(final int countOfOccupied) {
+        return countOfOccupied % 2 == 0 ? Figure.X : Figure.O;
+    }
+
+    private int countOccupiedCells(final IField field) {
+        int count = 0;
+        for (int i = 0; i < field.getSize(); i++) {
+            for (int j = 0; j < field.getSize(); j++) {
+                if (field.getFigure(new Point(i , j)) != null) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+}
