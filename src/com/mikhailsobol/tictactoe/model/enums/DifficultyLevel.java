@@ -1,7 +1,7 @@
 package com.mikhailsobol.tictactoe.model.enums;
 
 
-public enum DiffucultyLevel {
+public enum DifficultyLevel {
 
     EASY, HARD
 
