@@ -14,8 +14,9 @@ public class SingleplayerTicTacToeGame<Figure> extends AbstractGame<Figure> {
     public SingleplayerTicTacToeGame(final Player<Figure>[] players,
                                      final TicTacToeField<Figure> field,
                                      final IAi ai,
-                                     final boolean isSinglePlayer) {
-        super(players, field, isSinglePlayer);
+                                     final boolean isSinglePlayer,
+                                     final String name) {
+        super(players, field, isSinglePlayer, name);
         this.ai = ai;
     }
 

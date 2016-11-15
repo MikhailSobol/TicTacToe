@@ -6,18 +6,22 @@ import com.mikhailsobol.tictactoe.model.fields.IField;
 
 public abstract class AbstractGame<T> {
 
-    protected final Player<T>[] players;
+    private final String name;
 
-    protected final IField<T> field;
+    final Player<T>[] players;
 
-    protected final boolean isSingleplayer;
+    final IField<T> field;
+
+    final boolean isSingleplayer;
 
     public AbstractGame(final Player<T>[] players,
                         final IField<T> field,
-                        final boolean isSinglePlayer) {
+                        final boolean isSinglePlayer,
+                        final String name) {
         this.players = players;
         this.field = field;
         this.isSingleplayer = isSinglePlayer;
+        this.name = name;
     }
 
     public IField<T> getField() {
@@ -27,4 +31,9 @@ public abstract class AbstractGame<T> {
     public boolean isSingleplayer() {
         return isSingleplayer;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
 }
