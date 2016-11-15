@@ -7,7 +7,6 @@ import com.mikhailsobol.tictactoe.model.enums.Figure;
 import com.mikhailsobol.tictactoe.model.exceptions.PlayerNotFoundException;
 import com.mikhailsobol.tictactoe.model.fields.IField;
 import com.mikhailsobol.tictactoe.model.games.AbstractGame;
-import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
 public class TicTacToeCurrentMoveController {
 

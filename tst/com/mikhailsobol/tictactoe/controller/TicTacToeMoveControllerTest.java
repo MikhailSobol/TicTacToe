@@ -6,6 +6,7 @@ import com.mikhailsobol.tictactoe.model.exceptions.AlreadyOccupiedException;
 import com.mikhailsobol.tictactoe.model.exceptions.InvalidCoordinateException;
 import com.mikhailsobol.tictactoe.model.fields.IField;
 import com.mikhailsobol.tictactoe.model.fields.TicTacToeField;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
