@@ -6,7 +6,7 @@ import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.enums.DifficultyLevel;
 import com.mikhailsobol.tictactoe.model.fields.TicTacToeField;
 
-public class SingleplayerTicTacToeGame<Figure> extends AbstractGame<Figure> {
+public class SingleplayerTicTacToeGame<Figure> extends AbstractTicTacToeGame<Figure> {
 // TODO: test this class.
 
     private final IAi ai;

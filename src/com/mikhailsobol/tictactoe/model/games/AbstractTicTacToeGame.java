@@ -4,7 +4,7 @@ package com.mikhailsobol.tictactoe.model.games;
 import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.fields.IField;
 
-public abstract class AbstractGame<T> {
+public abstract class AbstractTicTacToeGame<T> {
 
     private final String name;
 
@@ -14,10 +14,10 @@ public abstract class AbstractGame<T> {
 
     final boolean isSingleplayer;
 
-    public AbstractGame(final Player<T>[] players,
-                        final IField<T> field,
-                        final boolean isSinglePlayer,
-                        final String name) {
+    public AbstractTicTacToeGame(final Player<T>[] players,
+                                 final IField<T> field,
+                                 final boolean isSinglePlayer,
+                                 final String name) {
         this.players = players;
         this.field = field;
         this.isSingleplayer = isSinglePlayer;

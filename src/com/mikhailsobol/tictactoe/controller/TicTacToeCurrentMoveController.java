@@ -6,11 +6,11 @@ import com.mikhailsobol.tictactoe.model.Point;
 import com.mikhailsobol.tictactoe.model.enums.Figure;
 import com.mikhailsobol.tictactoe.model.exceptions.PlayerNotFoundException;
 import com.mikhailsobol.tictactoe.model.fields.IField;
-import com.mikhailsobol.tictactoe.model.games.AbstractGame;
+import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
 
 public class TicTacToeCurrentMoveController {
 
-    public Player getCurrentPlayer(final AbstractGame game) throws PlayerNotFoundException {
+    public Player getCurrentPlayer(final AbstractTicTacToeGame game) throws PlayerNotFoundException {
         final Player[] players = game.getPlayers();
         final IField field = game.getField();
         final int occupiedCells = countOccupiedCells(field);
