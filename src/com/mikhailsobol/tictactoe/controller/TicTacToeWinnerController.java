@@ -9,7 +9,6 @@ import com.mikhailsobol.tictactoe.model.fields.IField;
 import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
 
 public class TicTacToeWinnerController {
-//TODO: refactor getWinner().
 
     public Player getWinner(final AbstractTicTacToeGame game) throws InvalidCoordinateException {
         final IField field = game.getField();
