@@ -8,7 +8,6 @@ import com.mikhailsobol.tictactoe.model.fields.IField;
 import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
 
 public class TicTacToeWinnerController {
-// TODO: test this class.
 
     public Player getWinner(final AbstractTicTacToeGame game) {
         final IField field = game.getField();
