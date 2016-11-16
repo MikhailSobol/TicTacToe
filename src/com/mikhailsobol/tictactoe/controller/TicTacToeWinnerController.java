@@ -8,27 +8,32 @@ import com.mikhailsobol.tictactoe.model.fields.IField;
 import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
 
 public class TicTacToeWinnerController {
+//TODO: refactor getWinner().
 
     public Player getWinner(final AbstractTicTacToeGame game) {
         final IField field = game.getField();
         final Player[] players = game.getPlayers();
         for (int i = 0; i < field.getSize(); i++) {
-            if (field.getFigure(new Point(0, i)) == field.getFigure(new Point(1, i)) &&
+            if (field.getFigure(new Point(0, i)) != null &&
+                    field.getFigure(new Point(0, i)) == field.getFigure(new Point(1, i)) &&
                     field.getFigure(new Point(0, i)) == field.getFigure(new Point(2, i))) {
                 return getPlayerByFigure((Figure) field.getFigure(new Point(0, i)), players);
             }
         }
         for (int i = 0; i < field.getSize(); i++) {
-            if (field.getFigure(new Point(i, 0)) == field.getFigure(new Point(i, 1)) &&
+            if (field.getFigure(new Point(i, 0)) != null &&
+                    field.getFigure(new Point(i, 0)) == field.getFigure(new Point(i, 1)) &&
                     field.getFigure(new Point(i, 0)) == field.getFigure(new Point(i, 2))) {
                 return getPlayerByFigure((Figure) field.getFigure(new Point(i, 0)), players);
             }
         }
-        if (field.getFigure(new Point(0, 0)) == field.getFigure(new Point(1, 1)) &&
+        if (field.getFigure(new Point(0, 0)) != null &&
+                field.getFigure(new Point(0, 0)) == field.getFigure(new Point(1, 1)) &&
                 field.getFigure(new Point(0, 0)) == field.getFigure(new Point(2, 2))) {
             return getPlayerByFigure((Figure) field.getFigure(new Point(0, 0)), players);
         }
-        if (field.getFigure(new Point(0, 2)) == field.getFigure(new Point(1, 1)) &&
+        if (field.getFigure(new Point(0, 2)) != null &&
+                field.getFigure(new Point(0, 2)) == field.getFigure(new Point(1, 1)) &&
                 field.getFigure(new Point(1, 1)) == field.getFigure(new Point(2, 0))) {
             return getPlayerByFigure((Figure) field.getFigure(new Point(0, 2)), players);
         }
