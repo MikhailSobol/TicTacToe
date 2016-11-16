@@ -13,16 +13,22 @@ public class TicTacToeWinnerController {
     public Player getWinner(final AbstractTicTacToeGame game) throws InvalidCoordinateException {
         final IField field = game.getField();
         final Player[] players = game.getPlayers();
-        for (int i = 0; i < field.getSize(); i++)
-            if (check(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1)))
+        for (int i = 0; i < field.getSize(); i++) {
+            if (check(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1))) {
                 return getPlayerByFigure((Figure) field.getFigure(new Point(i, 0)), players);
-        for (int i = 0; i < field.getSize(); i++)
-            if (check(field, new Point(0, i), p -> new Point(p.getX() + 1, p.getY())))
+            }
+        }
+        for (int i = 0; i < field.getSize(); i++) {
+            if (check(field, new Point(0, i), p -> new Point(p.getX() + 1, p.getY()))) {
                 return getPlayerByFigure((Figure) field.getFigure(new Point(0, i)), players);
-        if (check(field, new Point(0, 0), p -> new Point(p.getX() + 1, p.getY() + 1)))
+            }
+        }
+        if (check(field, new Point(0, 0), p -> new Point(p.getX() + 1, p.getY() + 1))) {
             return getPlayerByFigure((Figure) field.getFigure(new Point(0, 0)), players);
-        if (check(field, new Point(0, 2), p -> new Point(p.getX() - 1, p.getY() + 1)))
+        }
+        if (check(field, new Point(0, 2), p -> new Point(p.getX() + 1, p.getY() - 1))) {
             return getPlayerByFigure((Figure) field.getFigure(new Point(0, 2)), players);
+        }
 
         return null;
     }
@@ -35,12 +41,19 @@ public class TicTacToeWinnerController {
         final Point nextPoint = pointGenerator.getNextPoint(currentPoint);
         try {
             currentFigure = (Figure) field.getFigure(currentPoint);
+
+            if (currentFigure == null)
+                return false;
+
             nextFigure = (Figure) field.getFigure(nextPoint);
-            if (currentFigure == null) return false;
         } catch (final InvalidCoordinateException e) {
             return true;
         }
-        return currentFigure == nextFigure && check(field, nextPoint, pointGenerator);
+
+        if (currentFigure != nextFigure)
+            return false;
+
+        return check(field, nextPoint, pointGenerator);
     }
 
     private Player getPlayerByFigure(final Figure figure,
