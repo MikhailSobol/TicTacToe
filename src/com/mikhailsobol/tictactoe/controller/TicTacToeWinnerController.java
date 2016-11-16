@@ -4,40 +4,55 @@ package com.mikhailsobol.tictactoe.controller;
 import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.Point;
 import com.mikhailsobol.tictactoe.model.enums.Figure;
+import com.mikhailsobol.tictactoe.model.exceptions.InvalidCoordinateException;
 import com.mikhailsobol.tictactoe.model.fields.IField;
 import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
 
 public class TicTacToeWinnerController {
 //TODO: refactor getWinner().
 
-    public Player getWinner(final AbstractTicTacToeGame game) {
+    public Player getWinner(final AbstractTicTacToeGame game) throws InvalidCoordinateException {
         final IField field = game.getField();
         final Player[] players = game.getPlayers();
         for (int i = 0; i < field.getSize(); i++) {
-            if (field.getFigure(new Point(0, i)) != null &&
-                    field.getFigure(new Point(0, i)) == field.getFigure(new Point(1, i)) &&
-                    field.getFigure(new Point(0, i)) == field.getFigure(new Point(2, i))) {
-                return getPlayerByFigure((Figure) field.getFigure(new Point(0, i)), players);
-            }
-        }
-        for (int i = 0; i < field.getSize(); i++) {
-            if (field.getFigure(new Point(i, 0)) != null &&
-                    field.getFigure(new Point(i, 0)) == field.getFigure(new Point(i, 1)) &&
-                    field.getFigure(new Point(i, 0)) == field.getFigure(new Point(i, 2))) {
+            if (check(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1))) {
                 return getPlayerByFigure((Figure) field.getFigure(new Point(i, 0)), players);
             }
         }
-        if (field.getFigure(new Point(0, 0)) != null &&
-                field.getFigure(new Point(0, 0)) == field.getFigure(new Point(1, 1)) &&
-                field.getFigure(new Point(0, 0)) == field.getFigure(new Point(2, 2))) {
+        for (int i = 0; i < field.getSize(); i++) {
+            if (check(field, new Point(0, i), p -> new Point(p.getX() + 1, p.getY()))) {
+                return getPlayerByFigure((Figure) field.getFigure(new Point(0, i)), players);
+            }
+        }
+        if (check(field, new Point(0, 0), p -> new Point(p.getX() + 1, p.getY() + 1))) {
             return getPlayerByFigure((Figure) field.getFigure(new Point(0, 0)), players);
         }
-        if (field.getFigure(new Point(0, 2)) != null &&
-                field.getFigure(new Point(0, 2)) == field.getFigure(new Point(1, 1)) &&
-                field.getFigure(new Point(1, 1)) == field.getFigure(new Point(2, 0))) {
+        if (check(field, new Point(0, 2), p -> new Point(p.getX() - 1, p.getY() + 1))) {
             return getPlayerByFigure((Figure) field.getFigure(new Point(0, 2)), players);
         }
+
         return null;
+    }
+
+    private boolean check(final IField field,
+                          final Point currentPoint,
+                          final IPointGenerator pointGenerator) {
+        final Figure currentFigure;
+        final Figure nextFigure;
+        final Point nextPoint = pointGenerator.getNextPoint(currentPoint);
+        try {
+            currentFigure = (Figure) field.getFigure(currentPoint);
+            nextFigure = (Figure) field.getFigure(nextPoint);
+        } catch (final InvalidCoordinateException e) {
+            return true;
+        }
+        if (currentFigure == null) {
+            return false;
+        }
+        if (currentFigure != nextFigure) {
+            return false;
+        }
+        return check(field, nextPoint, pointGenerator);
     }
 
     private Player getPlayerByFigure(final Figure figure,
@@ -49,5 +64,12 @@ public class TicTacToeWinnerController {
         }
         return null;
     }
+
+    private interface IPointGenerator {
+
+        Point getNextPoint(final Point point);
+
+    }
+
 
 }

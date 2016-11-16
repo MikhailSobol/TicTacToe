@@ -13,7 +13,7 @@ public class TicTacToeMoveController {
                             final Figure figure,
                             final Point point) throws InvalidCoordinateException,
                                                         AlreadyOccupiedException {
-        if (!checkCoordinate(point, field)) {
+        if (!field.checkCoordinate(point)) {
             throw new InvalidCoordinateException();
         }
         if (!checkIfOccupied(point, field)) {
@@ -23,14 +23,8 @@ public class TicTacToeMoveController {
     }
 
     private boolean checkIfOccupied(final Point point,
-                                    final IField field) {
+                                    final IField field) throws InvalidCoordinateException {
         return field.getFigure(point) == null;
-    }
-
-    private boolean checkCoordinate(final Point point,
-                                    final IField field) {
-        return checkCoordinateX(point.getX(), field.getSize(), 0) &&
-                checkCoordinateY(point.getY(), field.getSize(), 0);
     }
 
     private boolean checkCoordinateX(final int x,

@@ -2,6 +2,7 @@ package com.mikhailsobol.tictactoe.model.fields;
 
 
 import com.mikhailsobol.tictactoe.model.Point;
+import com.mikhailsobol.tictactoe.model.exceptions.InvalidCoordinateException;
 
 public class TicTacToeField<T> implements IField<T> {
 
@@ -15,7 +16,12 @@ public class TicTacToeField<T> implements IField<T> {
     }
 
     @Override
-    public T getFigure(final Point point) {
+    public T getFigure(final Point point) throws InvalidCoordinateException {
+        // any checks shouldn't be done here.
+        // TODO: move it to some controller or something.
+        if (!checkCoordinate(point)) {
+            throw new InvalidCoordinateException();
+        }
         return field[point.getX()][point.getY()];
     }
 
@@ -23,6 +29,12 @@ public class TicTacToeField<T> implements IField<T> {
     public void setFigure(final Point point,
                              final T figure) {
         field[point.getX()][point.getY()] = figure;
+    }
+
+    @Override
+    public boolean checkCoordinate(final Point point) {
+        return point.getX() < FIELD_SIZE && point.getY() >= 0 &&
+                point.getY() < FIELD_SIZE && point.getY() >= 0;
     }
 
 }
