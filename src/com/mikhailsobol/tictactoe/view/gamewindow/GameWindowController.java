@@ -76,8 +76,8 @@ public class GameWindowController implements Initializable {
         final int[] coordinates = getCoordinates(buttonText);
         Point pointToMove = new Point(coordinates[0], coordinates[1]);
         gameController.makeMove(pointToMove);
-//        ((Button) event.getSource()).setText(String.valueOf(currentPlayer.getFigure()));
-//        ((Button) event.getSource()).setDisable(true);
+        ((Button) event.getSource()).setText(String.valueOf(currentPlayer.getFigure()));
+        ((Button) event.getSource()).setDisable(true);
         if (getWinner() != null || currentMoveController.countOccupiedCells(game.getField()) == 9) {
             winner = getWinner();
             Player.Winner.setWinner(winner);
