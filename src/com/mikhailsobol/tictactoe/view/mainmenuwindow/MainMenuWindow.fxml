@@ -26,12 +26,12 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="245.0" layoutY="149.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="311.0" style="-fx-background-color: #EE0432;" text="Multiplayer" textFill="WHITE">
+      <Button fx:id="multiplayerButton" layoutX="245.0" layoutY="149.0" mnemonicParsing="false" onAction="#gameButtonOnAction" prefHeight="64.0" prefWidth="311.0" style="-fx-background-color: #EE0432;" text="Multiplayer" textFill="WHITE">
          <font>
             <Font name="DejaVu Sans ExtraLight" size="32.0" />
          </font>
       </Button>
-      <Button layoutX="245.0" layoutY="242.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="227.0" style="-fx-background-color: #EE0432;" text="Singleplayer" textFill="WHITE">
+      <Button fx:id="singlePlayerButton" layoutX="245.0" layoutY="242.0" mnemonicParsing="false" onAction="#gameButtonOnAction" prefHeight="64.0" prefWidth="227.0" style="-fx-background-color: #EE0432;" text="Singleplayer" textFill="WHITE">
          <font>
             <Font name="DejaVu Sans ExtraLight" size="29.0" />
          </font>

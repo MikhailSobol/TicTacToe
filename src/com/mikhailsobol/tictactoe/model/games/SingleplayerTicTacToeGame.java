@@ -2,6 +2,7 @@ package com.mikhailsobol.tictactoe.model.games;
 
 
 import com.mikhailsobol.tictactoe.controller.Ai.IAi;
+import com.mikhailsobol.tictactoe.controller.GameController;
 import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.enums.DifficultyLevel;
 import com.mikhailsobol.tictactoe.model.fields.TicTacToeField;
@@ -23,5 +24,11 @@ public class SingleplayerTicTacToeGame<Figure> extends AbstractTicTacToeGame<Fig
     public DifficultyLevel getDifficultyLevel() {
         return ai.getDifficultyLevel();
     }
+
+
+    public IAi getAi() {
+        return ai;
+    }
+
 
 }

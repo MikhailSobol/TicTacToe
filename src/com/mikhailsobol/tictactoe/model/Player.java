@@ -20,4 +20,18 @@ public class Player<T> {
     public T getFigure() {
         return figure;
     }
+
+    public static class Winner {
+
+        private static Player winner;
+
+        public static Player getWinner() {
+            return winner;
+        }
+
+        public static void setWinner(Player winner) {
+            Winner.winner = winner;
+        }
+    }
+
 }

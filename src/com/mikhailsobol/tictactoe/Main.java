@@ -1,8 +1,8 @@
 package com.mikhailsobol.tictactoe;
 
 
+import com.mikhailsobol.tictactoe.model.games.playable.PlayableGame;
 import com.mikhailsobol.tictactoe.view.executables.UIRunner;
-import com.mikhailsobol.tictactoe.view.mainmenuwindow.MainMenu;
 
 public class Main {
 

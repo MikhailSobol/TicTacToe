@@ -9,10 +9,15 @@ import com.mikhailsobol.tictactoe.model.exceptions.AlreadyOccupiedException;
 import com.mikhailsobol.tictactoe.model.exceptions.InvalidCoordinateException;
 import com.mikhailsobol.tictactoe.model.fields.IField;
 
-public interface IAi {
+public class HardAi implements IAi {
 
-    Point move(final IField field) throws InvalidCoordinateException, AlreadyOccupiedException;
+    @Override
+    public Point move(final IField field) throws InvalidCoordinateException, AlreadyOccupiedException {
+        return new EasyAi().move(field);
+    }
 
-    DifficultyLevel getDifficultyLevel();
-
+    @Override
+    public DifficultyLevel getDifficultyLevel() {
+        return DifficultyLevel.HARD;
+    }
 }

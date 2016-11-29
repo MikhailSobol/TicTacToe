@@ -13,12 +13,10 @@ public class EasyAi implements IAi {
 // TODO: test this class.
 
     @Override
-    public void move(final TicTacToeMoveController moveController,
-                     final Figure figure,
-                     final IField field) throws InvalidCoordinateException,
+    public Point move(final IField field) throws InvalidCoordinateException,
                                             AlreadyOccupiedException {
-        final Point point = getPoint(field);
-        moveController.applyFigure(field, figure, point);
+        return getPoint(field);
+
     }
 
     @Override
