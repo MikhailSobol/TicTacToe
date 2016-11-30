@@ -17,12 +17,17 @@ import com.mikhailsobol.tictactoe.model.games.SingleplayerTicTacToeGame;
 import com.mikhailsobol.tictactoe.model.games.playable.PlayableGame;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -48,6 +53,39 @@ public class GameWindowController implements Initializable {
 
     private IAi ai;
 
+    @FXML
+    private Button buttons_00;
+
+    @FXML
+    private Button buttons_01;
+
+    @FXML
+    private Button buttons_02;
+
+    @FXML
+    private Button buttons_10;
+
+    @FXML
+    private Button buttons_11;
+
+    @FXML
+    private Button buttons_12;
+
+    @FXML
+    private Button buttons_20;
+
+    @FXML
+    private Button buttons_21;
+
+    @FXML
+    private Button buttons_22;
+
+    private Button[] buttons = {
+            buttons_00, buttons_01, buttons_02,
+            buttons_10, buttons_11, buttons_12,
+            buttons_20, buttons_21, buttons_22,
+    };
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         currentMoveController = new TicTacToeCurrentMoveController();
@@ -61,9 +99,7 @@ public class GameWindowController implements Initializable {
         }
         try {
             currentPlayer = currentMoveController.getCurrentPlayer(game);
-        } catch (PlayerNotFoundException e) {
-            e.printStackTrace();
-        } catch (InvalidCoordinateException e) {
+        } catch (PlayerNotFoundException | InvalidCoordinateException e) {
             e.printStackTrace();
         }
         updateLabel();
@@ -71,17 +107,17 @@ public class GameWindowController implements Initializable {
 
     @FXML
     private void buttonOnAction(final ActionEvent event) throws AlreadyOccupiedException,
-            InvalidCoordinateException, PlayerNotFoundException {
+            InvalidCoordinateException, PlayerNotFoundException, IOException {
         final String buttonText = ((Button) event.getSource()).getId();
         final int[] coordinates = getCoordinates(buttonText);
         Point pointToMove = new Point(coordinates[0], coordinates[1]);
         gameController.makeMove(pointToMove);
-        ((Button) event.getSource()).setText(String.valueOf(currentPlayer.getFigure()));
-        ((Button) event.getSource()).setDisable(true);
+        updateButtonByCoordinate(coordinates[0], coordinates[1]);
         if (getWinner() != null || currentMoveController.countOccupiedCells(game.getField()) == 9) {
             winner = getWinner();
             Player.Winner.setWinner(winner);
-            goToResultWindow();
+            goToResultWindow(event);
+            return;
         }
         updateInfo();
         if (game.isSingleplayer() && currentPlayer.getFigure().equals(Figure.O)) {
@@ -89,14 +125,41 @@ public class GameWindowController implements Initializable {
         }
     }
 
-    private void updateButtons(final ActionEvent event) {
-        // TODO: this method should update buttons text and disable occupied ones.
+    private void updateButtonByCoordinate(final int x,
+                                          final int y) throws InvalidCoordinateException {
+        final Button button = getButtonByCoordinate(x, y);
+        final Point point = new Point(x, y);
+        final String text = game.getField().getFigure(point) ==
+                null ? "" : String.valueOf(game.getField().getFigure(point));
+        button.setText(text);
+        button.setDisable(true);
+    }
+
+    private Button getButtonByCoordinate(final int x,
+                                         final int y) {
+        if (x == 0) {
+            if (y == 0) return buttons_00;
+            if (y == 1) return buttons_01;
+            if (y == 2) return buttons_02;
+        }
+        if (x == 1) {
+            if (y == 0) return buttons_10;
+            if (y == 1) return buttons_11;
+            if (y == 2) return buttons_12;
+        }
+        if (x == 2) {
+            if (y == 0) return buttons_20;
+            if (y == 1) return buttons_21;
+            if (y == 2) return buttons_22;
+        }
+        return null;
     }
 
     private void aiMove() throws InvalidCoordinateException,
             AlreadyOccupiedException, PlayerNotFoundException {
-        gameController.makeMove(ai.move(game.getField()));
-        System.out.println("Just made move!");
+        final Point point = ai.move(game.getField());
+        gameController.makeMove(point);
+        updateButtonByCoordinate(point.getX(), point.getY());
         updateInfo();
     }
 
@@ -105,8 +168,11 @@ public class GameWindowController implements Initializable {
         updateLabel();
     }
 
-    private void goToResultWindow() {
-
+    private void goToResultWindow(final ActionEvent event) throws IOException {
+        Parent settingSceneParent = FXMLLoader.load(getClass().getClassLoader().getResource("com/mikhailsobol/tictactoe/view/resultwindow/ResultWindow.fxml"));
+        Scene settingScene = new Scene(settingSceneParent);
+        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stageTheEventSourceNodeBelongs.setScene(settingScene);
     }
 
     private Player getWinner() throws InvalidCoordinateException {
