@@ -30,7 +30,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button fx:id="mainMenuButton" layoutX="168.0" layoutY="233.0" mnemonicParsing="false" onAction="#mainMenuButtonOnAction" prefHeight="64.0" prefWidth="198.0" text="Go to main window" textFill="#ee0432">
+      <Button fx:id="mainMenuButton" layoutX="168.0" layoutY="233.0" mnemonicParsing="false" onAction="#mainMenuButtonOnAction" prefHeight="64.0" prefWidth="198.0" style="-fx-background-color: #ee0432; -fx-text-fill: #FFFFFF;" text="Go to main window" textFill="#ee0432">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
