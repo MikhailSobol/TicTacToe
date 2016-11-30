@@ -31,27 +31,27 @@
          </font></Button>
       <Button fx:id="buttons_01" layoutX="225.0" layoutY="91.0" mnemonicParsing="false" onAction="#buttonOnAction" prefHeight="180.0" prefWidth="176.0" styleClass="buttonsStyleClass" textFill="#ee0432">
          <font>
-            <Font size="81.0" />
+            <Font name="System Bold" size="81.0" />
          </font></Button>
       <Button fx:id="buttons_02" layoutX="436.0" layoutY="91.0" mnemonicParsing="false" onAction="#buttonOnAction" prefHeight="180.0" prefWidth="176.0" styleClass="buttonsStyleClass" textFill="#ee0432">
          <font>
-            <Font size="81.0" />
+            <Font name="System Bold" size="81.0" />
          </font></Button>
       <Button fx:id="buttons_10" layoutX="14.0" layoutY="282.0" mnemonicParsing="false" onAction="#buttonOnAction" prefHeight="180.0" prefWidth="176.0" styleClass="buttonsStyleClass" textFill="#ee0432">
          <font>
-            <Font size="81.0" />
+            <Font name="System Bold" size="81.0" />
          </font></Button>
       <Button fx:id="buttons_11" layoutX="225.0" layoutY="282.0" mnemonicParsing="false" onAction="#buttonOnAction" prefHeight="180.0" prefWidth="176.0" styleClass="buttonsStyleClass" textFill="#ee0432">
          <font>
-            <Font size="81.0" />
+            <Font name="System Bold" size="81.0" />
          </font></Button>
       <Button fx:id="buttons_12" layoutX="436.0" layoutY="282.0" mnemonicParsing="false" onAction="#buttonOnAction" prefHeight="180.0" prefWidth="176.0" styleClass="buttonsStyleClass" textFill="#ee0432">
          <font>
-            <Font size="81.0" />
+            <Font name="System Bold" size="81.0" />
          </font></Button>
       <Button fx:id="buttons_20" layoutX="14.0" layoutY="473.0" mnemonicParsing="false" onAction="#buttonOnAction" prefHeight="180.0" prefWidth="176.0" styleClass="buttonsStyleClass" textFill="#ee0432">
          <font>
-            <Font size="81.0" />
+            <Font name="System Bold" size="81.0" />
          </font></Button>
       <Button fx:id="buttons_21" layoutX="225.0" layoutY="473.0" mnemonicParsing="false" onAction="#buttonOnAction" prefHeight="180.0" prefWidth="176.0" styleClass="buttonsStyleClass" textFill="#ee0432">
          <font>
