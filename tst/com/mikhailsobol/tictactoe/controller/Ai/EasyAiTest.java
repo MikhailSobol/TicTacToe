@@ -46,10 +46,7 @@ public class EasyAiTest {
                 e.printStackTrace();
             }
         }
-        if (currentMoveController.countOccupiedCells(game.getField()) != 9) {
-            return false;
-        }
-        return true;
+        return currentMoveController.countOccupiedCells(game.getField()) == 9;
     }
 
 }
