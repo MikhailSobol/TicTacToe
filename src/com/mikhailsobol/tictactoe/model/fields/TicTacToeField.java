@@ -17,8 +17,6 @@ public class TicTacToeField<T> implements IField<T> {
 
     @Override
     public T getFigure(final Point point) throws InvalidCoordinateException {
-        // any checks shouldn't be done here.
-        // TODO: move it to some controller or something.
         if (!checkCoordinate(point)) {
             throw new InvalidCoordinateException();
         }
@@ -36,5 +34,12 @@ public class TicTacToeField<T> implements IField<T> {
         return point.getX() < FIELD_SIZE && point.getY() >= 0 &&
                 point.getY() < FIELD_SIZE && point.getY() >= 0;
     }
+
+    @Override
+    public boolean checkIfOccupied(final Point point) throws InvalidCoordinateException {
+        if (!checkCoordinate(point)) throw new InvalidCoordinateException();
+        return this.getFigure(point) == null;
+    }
+
 
 }

@@ -15,4 +15,6 @@ public interface IField<T> {
 
     boolean checkCoordinate(final Point point);
 
+    boolean checkIfOccupied(final Point point) throws InvalidCoordinateException;
+
 }

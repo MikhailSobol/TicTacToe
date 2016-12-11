@@ -16,27 +16,10 @@ public class TicTacToeMoveController {
         if (!field.checkCoordinate(point)) {
             throw new InvalidCoordinateException();
         }
-        if (!checkIfOccupied(point, field)) {
+        if (!field.checkIfOccupied(point)) {
             throw new AlreadyOccupiedException();
         }
         field.setFigure(point, figure);
-    }
-
-    private boolean checkIfOccupied(final Point point,
-                                    final IField field) throws InvalidCoordinateException {
-        return field.getFigure(point) == null;
-    }
-
-    private boolean checkCoordinateX(final int x,
-                                     final int maxXSize,
-                                     final int minXSize) {
-        return x >= minXSize && x < maxXSize;
-    }
-
-    private boolean checkCoordinateY(final int y,
-                                     final int maxYSize,
-                                     final int minYSize) {
-        return y >= minYSize && y < maxYSize;
     }
 
 }

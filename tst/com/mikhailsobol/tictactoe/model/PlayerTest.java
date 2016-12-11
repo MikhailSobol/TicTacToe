@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PlayerTest {
+
     @Test
     public void getName() throws Exception {
         final String inputValue = "Michael";

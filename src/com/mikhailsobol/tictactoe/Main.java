@@ -1,7 +1,6 @@
 package com.mikhailsobol.tictactoe;
 
 
-import com.mikhailsobol.tictactoe.model.games.playable.PlayableGame;
 import com.mikhailsobol.tictactoe.view.executables.UIRunner;
 
 public class Main {

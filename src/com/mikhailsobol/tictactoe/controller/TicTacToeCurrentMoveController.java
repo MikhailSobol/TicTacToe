@@ -17,8 +17,7 @@ public class TicTacToeCurrentMoveController {
         final IField field = game.getField();
         final int occupiedCells = countOccupiedCells(field);
         final Figure currentFigure = getCurrentFigure(occupiedCells);
-        final Player currentPlayer = getPlayerByFigure(currentFigure, players);
-        return currentPlayer;
+        return getPlayerByFigure(currentFigure, players);
     }
 
     public int countOccupiedCells(final IField field) throws InvalidCoordinateException {
