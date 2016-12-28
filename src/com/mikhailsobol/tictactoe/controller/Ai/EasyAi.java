@@ -25,7 +25,7 @@ public class EasyAi implements IAi {
         do {
             x = (int) (Math.random() * field.getSize());
             y = (int) (Math.random() * field.getSize());
-        } while (!(field.isEmpty(new Point(x, y))));
+        } while (!(field.checkIfOccupied(new Point(x, y))));
         return new Point(x, y);
     }
 
