@@ -3,6 +3,7 @@ package com.mikhailsobol.tictactoe.model.fields;
 
 import com.mikhailsobol.tictactoe.model.Point;
 import com.mikhailsobol.tictactoe.model.enums.Figure;
+import com.mikhailsobol.tictactoe.model.exceptions.AlreadyOccupiedException;
 import com.mikhailsobol.tictactoe.model.exceptions.InvalidCoordinateException;
 
 import java.util.ArrayList;
@@ -29,18 +30,15 @@ public class TicTacToeField<T> implements IField<T>, Iterable<T> {
     }
 
     @Override
-    public boolean isEmpty(final Point point) throws InvalidCoordinateException {
-        return getFigure(point) == null;
-    }
-
-    @Override
-    public void setFigure(final Point point,
-                          final T figure) {
+    public synchronized void setFigure(final Point point,
+                          final T figure) throws InvalidCoordinateException,
+            AlreadyOccupiedException {
+        if (!checkIfOccupied(point)) throw new AlreadyOccupiedException();
         field[point.getX()][point.getY()] = figure;
     }
 
     @Override
-    public synchronized boolean checkCoordinate(final Point point) {
+    public boolean checkCoordinate(final Point point) {
         return point.getX() < FIELD_SIZE && point.getY() >= 0 &&
                 point.getY() < FIELD_SIZE && point.getY() >= 0;
     }
