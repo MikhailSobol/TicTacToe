@@ -24,20 +24,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameWindowController implements Initializable {
 
     private static final String DEFAULT_LABEL_TEXT = "Current player: ";
-
-    @FXML
-    Label currentPlayerLabel;
 
     private Player winner;
 
@@ -52,6 +47,9 @@ public class GameWindowController implements Initializable {
     private TicTacToeWinnerController winnerController;
 
     private IAi ai;
+
+    @FXML
+    private Label currentPlayerLabel;
 
     @FXML
     private Button buttons_00;
@@ -80,12 +78,6 @@ public class GameWindowController implements Initializable {
     @FXML
     private Button buttons_22;
 
-    private Button[] buttons = {
-            buttons_00, buttons_01, buttons_02,
-            buttons_10, buttons_11, buttons_12,
-            buttons_20, buttons_21, buttons_22,
-    };
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         currentMoveController = new TicTacToeCurrentMoveController();
@@ -95,7 +87,6 @@ public class GameWindowController implements Initializable {
         gameController = new GameController(game);
         if (game.isSingleplayer()) {
             ai = (IAi) game.getAi();
-            System.out.println(ai.getDifficultyLevel());
         }
         try {
             currentPlayer = currentMoveController.getCurrentPlayer(game);

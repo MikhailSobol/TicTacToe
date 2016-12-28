@@ -8,7 +8,7 @@ public class PlayableGame implements IPlayableGame {
     private static AbstractTicTacToeGame game;
 
     public PlayableGame(final AbstractTicTacToeGame game) {
-        this.game = game;
+        PlayableGame.game = game;
     }
 
     public static void setGame(final AbstractTicTacToeGame game) {

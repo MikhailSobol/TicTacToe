@@ -29,7 +29,7 @@ public class Player<T> {
             return winner;
         }
 
-        public static void setWinner(Player winner) {
+        public static void setWinner(final Player winner) {
             Winner.winner = winner;
         }
     }

@@ -1,7 +1,7 @@
 package com.mikhailsobol.tictactoe.model.games;
 
 
-import com.mikhailsobol.tictactoe.controller.GameController;
+import com.mikhailsobol.tictactoe.controller.Ai.IAi;
 import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.fields.IField;
 
@@ -14,7 +14,8 @@ public abstract class AbstractTicTacToeGame<T> {
     final IField<T> field;
 
     final boolean isSingleplayer;
-    private Object ai;
+
+    private IAi ai;
 
     public AbstractTicTacToeGame(final Player<T>[] players,
                                  final IField<T> field,
@@ -42,7 +43,7 @@ public abstract class AbstractTicTacToeGame<T> {
         return this.players;
     }
 
-    public Object getAi() {
+    public IAi getAi() {
         return ai;
     }
 }
