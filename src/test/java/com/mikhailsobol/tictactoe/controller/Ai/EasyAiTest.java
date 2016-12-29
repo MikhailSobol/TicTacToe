@@ -9,7 +9,6 @@ import com.mikhailsobol.tictactoe.model.exceptions.AlreadyOccupiedException;
 import com.mikhailsobol.tictactoe.model.exceptions.InvalidCoordinateException;
 import com.mikhailsobol.tictactoe.model.exceptions.PlayerNotFoundException;
 import com.mikhailsobol.tictactoe.model.fields.TicTacToeField;
-import com.mikhailsobol.tictactoe.model.games.MultiplayerTicTacToeGame;
 import com.mikhailsobol.tictactoe.model.games.SingleplayerTicTacToeGame;
 import org.junit.Test;
 
@@ -46,7 +45,7 @@ public class EasyAiTest {
                 e.printStackTrace();
             }
         }
-        return currentMoveController.countOccupiedCells(game.getField()) == 9;
+        return field.hasEmptyCell();
     }
 
 }

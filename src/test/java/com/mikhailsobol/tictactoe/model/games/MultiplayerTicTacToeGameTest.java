@@ -1,8 +1,7 @@
 package com.mikhailsobol.tictactoe.model.games;
 
 import com.mikhailsobol.tictactoe.model.Player;
-import com.mikhailsobol.tictactoe.model.enums.Figure;
-import com.mikhailsobol.tictactoe.model.fields.IField;
+import com.mikhailsobol.tictactoe.model.enums.Figure;;
 import com.mikhailsobol.tictactoe.model.fields.TicTacToeField;
 import org.junit.Test;
 
