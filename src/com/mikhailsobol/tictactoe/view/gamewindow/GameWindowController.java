@@ -106,14 +106,22 @@ public class GameWindowController implements Initializable {
         updateButtonByCoordinate(coordinates[0], coordinates[1]);
         updateInfo();
         if (getWinner() != null || currentMoveController.countOccupiedCells(game.getField()) >= 9) {
-            winner = getWinner();
-            Player.Winner.setWinner(winner);
-            goToResultWindow(event);
+            handleWinning(event);
             return;
         }
         if (game.isSingleplayer() && currentPlayer.getFigure().equals(Figure.O)) {
             aiMove();
         }
+        if (getWinner() != null || currentMoveController.countOccupiedCells(game.getField()) >= 9) {
+            handleWinning(event);
+        }
+    }
+
+    private void handleWinning(final ActionEvent event) throws InvalidCoordinateException, IOException {
+        winner = getWinner();
+        Player.Winner.setWinner(winner);
+        goToResultWindow(event);
+        return;
     }
 
     private void updateButtonByCoordinate(final int x,
