@@ -34,7 +34,6 @@ public class HardAi implements IAi {
     }
 
     private Figure getCurrentFigure(final IField field) throws InvalidCoordinateException, PlayerNotFoundException {
-        final Player[] players = new Player[] { new Player("", Figure.X), new Player("", Figure.O) };
         return (Figure) new TicTacToeCurrentMoveController().getCurrentPlayer(
                 new MultiplayerTicTacToeGame<>(
                     new Player[] { new Player("", Figure.X), new Player("", Figure.O)},
