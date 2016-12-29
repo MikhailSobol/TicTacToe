@@ -1,7 +1,6 @@
 package com.mikhailsobol.tictactoe.controller;
 
 
-import com.google.common.annotations.VisibleForTesting;
 import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.enums.Figure;
 import com.mikhailsobol.tictactoe.model.exceptions.InvalidCoordinateException;
@@ -18,8 +17,7 @@ public class TicTacToeCurrentMoveController {
                 game.getPlayers());
     }
 
-    @VisibleForTesting
-    protected int countOccupiedCells(final IField field) throws InvalidCoordinateException {
+    int countOccupiedCells(final IField field) throws InvalidCoordinateException {
         int counter = 0;
         for (final Object figure : field) {
             if (figure != null) counter++;
