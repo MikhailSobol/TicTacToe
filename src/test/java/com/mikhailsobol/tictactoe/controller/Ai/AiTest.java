@@ -17,13 +17,15 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
-public class EasyAiTest {
+public class AiTest {
 
     @Test
     public void move() throws Exception {
         final Set<IAi> ais = new HashSet<>(2);
         final IAi easyAi = new EasyAi();
+        final IAi hardAi = new HardAi();
         ais.add(easyAi);
+        ais.add(hardAi);
 
         for (final IAi ai : ais) {
             if (!test(ai))
