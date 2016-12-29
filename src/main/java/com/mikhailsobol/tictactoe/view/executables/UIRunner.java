@@ -15,6 +15,5 @@ public class UIRunner extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Done");
     }
 }
