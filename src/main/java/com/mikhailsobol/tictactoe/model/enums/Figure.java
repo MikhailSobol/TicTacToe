@@ -1,8 +1,8 @@
 package com.mikhailsobol.tictactoe.model.enums;
 
 
-public enum DifficultyLevel {
+public enum Figure {
 
-    EASY, HARD
+    X, O
 
 }
