@@ -36,8 +36,6 @@ public class AiTest {
     private static boolean test(final IAi ai) throws InvalidCoordinateException {
         final Player[] players = { new Player("Mike", Figure.X), new Player("ai", Figure.O) };
         final TicTacToeField<Figure> field = new TicTacToeField<>();
-        final TicTacToeMoveController moveController = new TicTacToeMoveController();
-        final TicTacToeCurrentMoveController currentMoveController = new TicTacToeCurrentMoveController();
         final SingleplayerTicTacToeGame game = new SingleplayerTicTacToeGame(players, field, ai, true, "TTT");
         final GameController gameController = new GameController(game);
         for (int i = 0; i < 9; i++) {
