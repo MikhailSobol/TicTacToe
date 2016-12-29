@@ -1,6 +1,7 @@
 package com.mikhailsobol.tictactoe.controller.Ai;
 
 
+import com.mikhailsobol.tictactoe.controller.TicTacToeCurrentMoveController;
 import com.mikhailsobol.tictactoe.model.Point;
 import com.mikhailsobol.tictactoe.model.enums.AiDifficultyLevel;
 import com.mikhailsobol.tictactoe.model.exceptions.AlreadyOccupiedException;

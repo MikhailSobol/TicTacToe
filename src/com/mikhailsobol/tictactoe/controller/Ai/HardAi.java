@@ -1,6 +1,7 @@
 package com.mikhailsobol.tictactoe.controller.Ai;
 
 
+import com.mikhailsobol.tictactoe.controller.TicTacToeCurrentMoveController;
 import com.mikhailsobol.tictactoe.controller.TicTacToeWinnerController;
 import com.mikhailsobol.tictactoe.model.Point;
 import com.mikhailsobol.tictactoe.model.enums.AiDifficultyLevel;
@@ -26,8 +27,16 @@ public class HardAi implements IAi {
     private Point getPoint(final IField field)
                            throws InvalidCoordinateException,
                                     AlreadyOccupiedException, PlayerNotFoundException {
-        final Point point = checkForOpportunityToWin(field, Figure.O);
-        return point != null ? point : new EasyAi().move(field);
+        Point point = checkForOpportunityToWin(field, Figure.O);
+        if (point != null) return point;
+        point = blockOpponentWinning(field, Figure.X);
+        if (point != null) return point;
+        return new EasyAi().move(field);
+    }
+
+    private Point blockOpponentWinning(final IField field,
+                                       final Figure figure) throws InvalidCoordinateException, PlayerNotFoundException {
+        return checkForOpportunityToWin(field, figure);
     }
 
     private Point checkForOpportunityToWin(final IField field,
@@ -96,16 +105,6 @@ public class HardAi implements IAi {
             return point;
         }
         return null;
-    }
-
-    private void printField(final IField field) throws InvalidCoordinateException {
-        for (int i = 0; i < field.getSize(); i++) {
-            for (int j = 0; j < field.getSize(); j++) {
-                System.out.print(field.getFigure(new Point(i, j)));
-            }
-            System.out.println();
-        }
-        System.out.println("~~~~~~~~");
     }
 
 }
