@@ -50,10 +50,8 @@ public class TicTacToeWinnerController {
             return true;
         }
 
-        if (currentFigure != nextFigure)
-            return false;
+        return currentFigure == nextFigure && check(field, nextPoint, pointGenerator);
 
-        return check(field, nextPoint, pointGenerator);
     }
 
     private Player getPlayerByFigure(final Figure figure,
@@ -66,7 +64,7 @@ public class TicTacToeWinnerController {
         return null;
     }
 
-    private interface IPointGenerator {
+    public interface IPointGenerator {
 
         Point getNextPoint(final Point point);
 

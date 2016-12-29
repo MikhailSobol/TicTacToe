@@ -104,15 +104,15 @@ public class GameWindowController implements Initializable {
         Point pointToMove = new Point(coordinates[0], coordinates[1]);
         gameController.makeMove(pointToMove);
         updateButtonByCoordinate(coordinates[0], coordinates[1]);
+        updateInfo();
+        if (game.isSingleplayer() && currentPlayer.getFigure().equals(Figure.O)) {
+            aiMove();
+        }
         if (getWinner() != null || currentMoveController.countOccupiedCells(game.getField()) == 9) {
             winner = getWinner();
             Player.Winner.setWinner(winner);
             goToResultWindow(event);
             return;
-        }
-        updateInfo();
-        if (game.isSingleplayer() && currentPlayer.getFigure().equals(Figure.O)) {
-            aiMove();
         }
     }
 
@@ -150,6 +150,7 @@ public class GameWindowController implements Initializable {
             AlreadyOccupiedException, PlayerNotFoundException {
         final Point point = ai.move(game.getField());
         gameController.makeMove(point);
+        System.out.println("WHAT " + point.getX() + point.getY());
         updateButtonByCoordinate(point.getX(), point.getY());
         updateInfo();
     }
