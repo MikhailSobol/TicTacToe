@@ -1,8 +1,6 @@
 package com.mikhailsobol.tictactoe.controller.Ai;
 
 import com.mikhailsobol.tictactoe.controller.GameController;
-import com.mikhailsobol.tictactoe.controller.TicTacToeCurrentMoveController;
-import com.mikhailsobol.tictactoe.controller.TicTacToeMoveController;
 import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.enums.Figure;
 import com.mikhailsobol.tictactoe.model.exceptions.AlreadyOccupiedException;
@@ -45,7 +43,7 @@ public class AiTest {
                 e.printStackTrace();
             }
         }
-        return field.hasEmptyCell();
+        return !field.hasEmptyCell();
     }
 
 }
