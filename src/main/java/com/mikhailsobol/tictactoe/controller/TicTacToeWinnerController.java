@@ -15,7 +15,7 @@ public class TicTacToeWinnerController {
 
     public Player getWinner(final AbstractTicTacToeGame game) throws InvalidCoordinateException {
         final IField field = game.getField();
-        if (new TicTacToeCurrentMoveController().countOccupiedCells(field) == 9) return DRAW_MARKER;
+        if (!field.hasEmptyCell()) return DRAW_MARKER;
         final Player[] players = game.getPlayers();
         for (int i = 0; i < field.getSize(); i++) {
             if (check(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1))) {
