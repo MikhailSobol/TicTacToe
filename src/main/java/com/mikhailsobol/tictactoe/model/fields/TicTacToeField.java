@@ -57,8 +57,8 @@ public class TicTacToeField<T> implements IField<T>, Iterable<T> {
 
     @Override
     public boolean hasEmptyCell() {
-        for (final T figure : this) if (figure == null) return false;
-        return true;
+        for (final T figure : this) if (figure == null) return true;
+        return false;
     }
 
     private ArrayList<T> getFieldAsList() {
