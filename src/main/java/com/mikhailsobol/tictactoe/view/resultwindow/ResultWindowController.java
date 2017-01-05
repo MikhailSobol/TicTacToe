@@ -2,6 +2,12 @@ package com.mikhailsobol.tictactoe.view.resultwindow;
 
 
 import com.mikhailsobol.tictactoe.model.Player;
+import com.mikhailsobol.tictactoe.model.exceptions.UnsupportedGameTypeException;
+import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
+import com.mikhailsobol.tictactoe.model.games.factrories.TicTacToeGameFactory;
+import com.mikhailsobol.tictactoe.model.games.playable.PlayableGame;
+import com.mikhailsobol.tictactoe.view.uihelpers.FactoryContainer;
+import com.mikhailsobol.tictactoe.view.uihelpers.WindowChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +29,7 @@ public class ResultWindowController implements Initializable {
     private static final String DEFAULT_DRAW_TEXT = "Draw!";
 
     private static final String DRAW_PLAYER_NAME = "DRAW";
+
     @FXML
     private Label resultLabel;
 
@@ -35,6 +42,7 @@ public class ResultWindowController implements Initializable {
                 DRAW_PLAYER_NAME.equals(winner.getName()) ?
                         DEFAULT_DRAW_TEXT : DEFAULT_WINNER_TEXT + winner.getName();
         resultLabel.setText(result);
+        if (!DEFAULT_DRAW_TEXT.equals(result)) resultLabel.setTranslateX(-100);
     }
 
     @FXML
@@ -43,6 +51,26 @@ public class ResultWindowController implements Initializable {
         Scene settingScene = new Scene(settingSceneParent);
         Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stageTheEventSourceNodeBelongs.setScene(settingScene);
+    }
+
+    @FXML
+    private void replayButtonOnAction(final ActionEvent event) throws IOException {
+        final AbstractTicTacToeGame game;
+        try {
+            game = getGame();
+            PlayableGame.setGame(game);
+        } catch (UnsupportedGameTypeException e) {
+            e.printStackTrace();
+        }
+        new WindowChanger().changeWindow("GameWindow", event);
+    }
+
+    private AbstractTicTacToeGame getGame() throws UnsupportedGameTypeException {
+        if (PlayableGame.getGame().isSingleplayer()) {
+            return FactoryContainer.getFactory().getGame("SINGLEPLAYER", PlayableGame.getGame().getAi());
+        } else {
+            return FactoryContainer.getFactory().getGame("MULTIPLAYER", null);
+        }
     }
 
 }
