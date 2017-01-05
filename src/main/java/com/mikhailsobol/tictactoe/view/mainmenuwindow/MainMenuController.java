@@ -3,28 +3,24 @@ package com.mikhailsobol.tictactoe.view.mainmenuwindow;
 import com.mikhailsobol.tictactoe.controller.Ai.EasyAi;
 import com.mikhailsobol.tictactoe.controller.Ai.HardAi;
 import com.mikhailsobol.tictactoe.controller.Ai.IAi;
-import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.enums.AiDifficultyLevel;
-import com.mikhailsobol.tictactoe.model.enums.Figure;
-import com.mikhailsobol.tictactoe.model.fields.IField;
-import com.mikhailsobol.tictactoe.model.fields.TicTacToeField;
+import com.mikhailsobol.tictactoe.model.exceptions.UnsupportedGameTypeException;
 import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
 import com.mikhailsobol.tictactoe.model.games.playable.PlayableGame;
 import com.mikhailsobol.tictactoe.model.games.MultiplayerTicTacToeGame;
 import com.mikhailsobol.tictactoe.model.games.SingleplayerTicTacToeGame;
+import com.mikhailsobol.tictactoe.model.games.factrories.TicTacToeGameFactory;
+import com.mikhailsobol.tictactoe.view.uihelpers.FactoryContainer;
+import com.mikhailsobol.tictactoe.view.uihelpers.WindowChanger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -51,11 +47,13 @@ public class MainMenuController implements Initializable {
         goToGameWindow(event);
     }
 
+    @FXML
+    private void onlineButtonOnAction(final ActionEvent event) throws IOException {
+        new WindowChanger().changeWindow("OnlineWindow", event);
+    }
+
     private void goToGameWindow(final ActionEvent event) throws Exception {
-        Parent settingSceneParent = FXMLLoader.load(getClass().getClassLoader().getResource("GameWindow.fxml"));
-        Scene settingScene = new Scene(settingSceneParent);
-        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stageTheEventSourceNodeBelongs.setScene(settingScene);
+        new WindowChanger().changeWindow("GameWindow", event);
     }
 
     private boolean checkAi() {
@@ -66,26 +64,16 @@ public class MainMenuController implements Initializable {
         return aiDifficultyLevelChoiceBox.getValue().equals(AiDifficultyLevel.EASY) ? new EasyAi() : new HardAi();
     }
 
-    private AbstractTicTacToeGame getGame(final String gameType) {
+    private AbstractTicTacToeGame getGame(final String gameType) throws UnsupportedGameTypeException {
         return SINGLEPLAYER_BUTTON_TEXT.equals(gameType) ? getSingleplayerGame() : getMultiplayerGame();
     }
 
-    private SingleplayerTicTacToeGame getSingleplayerGame() {
-        final Player[] players = {new Player("Player1", Figure.X), new Player("Player2", Figure.O)};
-        final IField field = new TicTacToeField();
-        final IAi ai = getAi();
-        final boolean isSingle = true;
-        final String name = "Tic Tac Toe";
-        return new SingleplayerTicTacToeGame(players,
-                (TicTacToeField) field,ai, isSingle, name);
+    private SingleplayerTicTacToeGame getSingleplayerGame() throws UnsupportedGameTypeException {
+        return (SingleplayerTicTacToeGame) FactoryContainer.getFactory().getGame("SINGLEPLAYER", getAi());
     }
 
-    private MultiplayerTicTacToeGame getMultiplayerGame() {
-        final Player[] players = {new Player("Player1", Figure.X), new Player("Player2", Figure.O)};
-        final IField field = new TicTacToeField();
-        final boolean isSingle = false;
-        final String name = "Tic Tac Toe";
-        return new MultiplayerTicTacToeGame(players, field, isSingle, name);
+    private MultiplayerTicTacToeGame getMultiplayerGame() throws UnsupportedGameTypeException {
+        return (MultiplayerTicTacToeGame) FactoryContainer.getFactory().getGame("MULTIPLAYER", null);
     }
 
     private void initializeChoiceBox() {
