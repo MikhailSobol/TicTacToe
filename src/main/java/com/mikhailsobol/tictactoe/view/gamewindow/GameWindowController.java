@@ -15,16 +15,12 @@ import com.mikhailsobol.tictactoe.model.games.MultiplayerTicTacToeGame;
 import com.mikhailsobol.tictactoe.model.games.SingleplayerTicTacToeGame;
 import com.mikhailsobol.tictactoe.model.games.playable.PlayableGame;
 import com.mikhailsobol.tictactoe.model.games.AbstractTicTacToeGame;
+import com.mikhailsobol.tictactoe.view.uihelpers.WindowChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,19 +30,19 @@ import java.util.ResourceBundle;
 
 public class GameWindowController implements Initializable {
 
-    private static final String DEFAULT_LABEL_TEXT = "Current player: ";
+    protected static final String DEFAULT_LABEL_TEXT = "Current player: ";
 
-    private Player winner;
+    protected Player winner;
 
-    private TicTacToeCurrentMoveController currentMoveController;
+    protected TicTacToeCurrentMoveController currentMoveController;
 
-    private GameController gameController;
+    protected GameController gameController;
 
-    private Player currentPlayer;
+    protected Player currentPlayer;
 
-    private AbstractTicTacToeGame game;
+    protected AbstractTicTacToeGame game;
 
-    private TicTacToeWinnerController winnerController;
+    protected TicTacToeWinnerController winnerController;
 
     private IAi ai;
 
@@ -81,7 +77,8 @@ public class GameWindowController implements Initializable {
     private Button buttons_22;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location,
+                           final ResourceBundle resources) {
         currentMoveController = new TicTacToeCurrentMoveController();
         game = PlayableGame.getGame();
         game = game.isSingleplayer() ? (SingleplayerTicTacToeGame) game : (MultiplayerTicTacToeGame) game;
@@ -99,8 +96,8 @@ public class GameWindowController implements Initializable {
     }
 
     @FXML
-    private void buttonOnAction(final ActionEvent event) throws AlreadyOccupiedException,
-            InvalidCoordinateException, PlayerNotFoundException, IOException {
+    protected void buttonOnAction(final ActionEvent event) throws AlreadyOccupiedException,
+            InvalidCoordinateException, PlayerNotFoundException, IOException, InterruptedException {
         final String buttonText = ((Button) event.getSource()).getId();
         final int[] coordinates = getCoordinates(buttonText);
         Point pointToMove = new Point(coordinates[0], coordinates[1]);
@@ -119,13 +116,13 @@ public class GameWindowController implements Initializable {
         }
     }
 
-    private void handleWinning(final ActionEvent event) throws InvalidCoordinateException, IOException {
+    protected void handleWinning(final ActionEvent event) throws InvalidCoordinateException, IOException {
         winner = getWinner();
         Player.Winner.setWinner(winner);
         goToResultWindow(event);
     }
 
-    private void updateButtonByCoordinate(final int x,
+    protected void updateButtonByCoordinate(final int x,
                                           final int y) throws InvalidCoordinateException {
         final Button button = getButtonByCoordinate(x, y);
         final Point point = new Point(x, y);
@@ -171,13 +168,10 @@ public class GameWindowController implements Initializable {
     }
 
     private void goToResultWindow(final ActionEvent event) throws IOException {
-        Parent settingSceneParent = FXMLLoader.load(getClass().getClassLoader().getResource("ResultWindow.fxml"));
-        Scene settingScene = new Scene(settingSceneParent);
-        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stageTheEventSourceNodeBelongs.setScene(settingScene);
+        new WindowChanger().changeWindow("ResultWindow", event);
     }
 
-    private Player getWinner() throws InvalidCoordinateException {
+    protected Player getWinner() throws InvalidCoordinateException {
         return winnerController.getWinner(game);
     }
 
@@ -185,7 +179,7 @@ public class GameWindowController implements Initializable {
         currentPlayer = currentMoveController.getCurrentPlayer(game);
     }
 
-    private int[] getCoordinates(final String buttonName) {
+    protected int[] getCoordinates(final String buttonName) {
         final String coordinatesPart = buttonName.substring(buttonName.length() - 2);
         final String[] coordinateAsString = coordinatesPart.split("");
         final int firstCoordinate = Integer.parseInt(coordinateAsString[0]);
@@ -193,7 +187,7 @@ public class GameWindowController implements Initializable {
         return new int[] {firstCoordinate, secondCoordinate};
     }
 
-    private void updateLabel() {
+    protected void updateLabel() {
         currentPlayerLabel.setText(DEFAULT_LABEL_TEXT + currentPlayer.getName());
     }
 
