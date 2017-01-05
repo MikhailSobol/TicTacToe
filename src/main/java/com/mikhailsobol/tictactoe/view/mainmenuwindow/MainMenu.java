@@ -12,9 +12,9 @@ public class MainMenu extends Application implements Runnable {
 
     private static final String TITLE = "Tic tac toe. Main window.";
 
-    private static final int WIDTH = 800;
+    private static final int WIDTH = 607;
 
-    private static final int HEIGHT = 600;
+    private static final int HEIGHT = 528;
 
     @Override
     public void run() {
