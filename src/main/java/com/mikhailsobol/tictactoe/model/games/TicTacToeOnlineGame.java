@@ -1,5 +1,6 @@
 package com.mikhailsobol.tictactoe.model.games;
 
+
 import com.mikhailsobol.tictactoe.model.Player;
 import com.mikhailsobol.tictactoe.model.fields.IField;
 import com.mikhailsobol.tictactoe.server.TicTacToeServer;
