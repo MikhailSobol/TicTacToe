@@ -54,9 +54,10 @@ public class HardAi implements IAi {
 
     private Point checkForOpportunityToWin(final IField field,
                                            final Figure figure) throws InvalidCoordinateException, PlayerNotFoundException {
-        if (checkVertical(field, figure) != null) return checkVertical(field, figure);
-        if (checkHorizontal(field, figure) != null) return checkHorizontal(field, figure);
-        if (checkDiagonalLeftToRight(field, figure) != null) return checkDiagonalLeftToRight(field, figure);
+        Point result;
+        if ((result = checkVertical(field, figure)) != null) return result;
+        if ((result = checkHorizontal(field, figure)) != null) return result;
+        if ((result = checkDiagonalLeftToRight(field, figure)) != null) return result;
         return checkDiagonalRightToLeft(field, figure);
     }
 
